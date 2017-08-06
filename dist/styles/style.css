@@ -40,6 +40,7 @@ main section.atm-box section.screen-container section.screen {
   height: 300px;
   border-radius: 4px;
   background-color: black;
+  color: greenyellow;
 }
 main section.atm-box section.lower-atm-box-container {
   align-self: center;
