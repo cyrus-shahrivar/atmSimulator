@@ -1,3 +1,23 @@
+@keyframes change-background {
+  0% {
+    background-color: rgba(0,0,0,0);
+    // opacity: 0;
+  }
+  50% {
+    background-color: rgba(255,255,0,1);
+    // opacity: 1;
+  }
+  100% {
+    background-color: rgba(0,0,0,0);
+    // opacity: 0
+  }
+}
+
+.glow-yellow {
+    animation: change-background 4s ease infinite;
+    animation-delay: 10s;
+}
+
 main {
     display: flex;
     justify-content: center;
@@ -92,6 +112,35 @@ main {
                 }
             }
         }
+    }
+}
+
+#modal {
+    width: 100vw;
+    height: 100vh;
+    background-color: grey;
+    position: fixed;
+    top: 0;
+    opacity: 0.9;
+    display: none;
+    #dismissal-x {
+        color: whitesmoke;
+        font-size: 48px;
+        position: fixed;
+        right: 10px;
+        cursor: pointer;
+        &:hover {
+            color: white;
+        }
+    }
+    h1 {
+        text-align: center;
+        padding-top: 40px;
+    }
+
+    h2 {
+        display: none;
+        text-align: center;
     }
 }
 

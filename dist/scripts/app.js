@@ -52,6 +52,13 @@ function withdrawl(amount) {
     }
 }
 
+// UI Utils
+function displayPin(pin) {
+    var $pin = $('#pin');
+    $pin.html('Your PIN is ' + pin);
+    $pin.fadeIn();
+}
+
 // General Flow
 /*
 1. User is presented with welcome splash screen and PIN
@@ -61,7 +68,23 @@ function withdrawl(amount) {
 END: User is presented with congratulations screen
 */
 
-$('#screen').html('<p>Welcome to The Bank\'s ATM! Please insert your debit card to continue.</p>');
+// Init Flow
+createAccount();
+savePinToLocalStorage(createAPin());
+displayPin(getPinFromLocalStorage());
+
+(function modal(){
+    $('#modal').fadeIn('slow');
+})();
+
+
+$('#dismissal-x').click(function(){
+    $('#modal').fadeOut('fast');
+    $('#screen').html('<p>Welcome to The Bank\'s ATM! Please insert your debit card to continue.</p>');
+    $('.card').addClass('glow-yellow');
+});
+
+
 
 // Dialogue
 /*
