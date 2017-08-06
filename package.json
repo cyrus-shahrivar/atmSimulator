@@ -1,0 +1,29 @@
+{
+  "name": "atmsimulator",
+  "version": "1.0.0",
+  "description": "an atm simulator to help people use atms",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyrus-shahrivar/atmSimulator.git"
+  },
+  "keywords": [
+    "atm",
+    "simulator"
+  ],
+  "author": "Cyrus Shahrivar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cyrus-shahrivar/atmSimulator/issues"
+  },
+  "homepage": "https://github.com/cyrus-shahrivar/atmSimulator#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-less": "^3.3.2",
+    "gulp-watch": "^4.3.11",
+    "path": "^0.12.7"
+  }
+}
