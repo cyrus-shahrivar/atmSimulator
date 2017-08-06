@@ -8,9 +8,6 @@
         <link href="dist/styles/style.css" rel="stylesheet">
     </head>
     <body>
-        <header>
-            <h1>ATM Simulator</h1>
-        </header>
         <main>
             <section class="atm-box">
                 <section class="screen-container">
@@ -30,36 +27,44 @@
                         <button></button>
                     </section>
                 </section>
-                <section class="keypad-container">
-                    <section class="keypad">
-                        <button>1</button>
-                        <button>2</button>
-                        <button>3</button>
-                        <button>4</button>
-                        <button>5</button>
-                        <button>6</button>
-                        <button>7</button>
-                        <button>8</button>
-                        <button>9</button>
-                        <button>C</button>
-                        <button>0</button>
-                        <button>E</button>
-                    </section>
-                </section>
                 <section class="lower-atm-box-container">
-                    <section class="deposit"></section>
-                    <section class="withdrawl"></section>
-                    <section class="receipt"></section>
+                    <section class="keypad-container">
+                        <section class="keypad">
+                            <button>1</button>
+                            <button>2</button>
+                            <button>3</button>
+                            <button>4</button>
+                            <button>5</button>
+                            <button>6</button>
+                            <button>7</button>
+                            <button>8</button>
+                            <button>9</button>
+                            <button>CLEAR</button>
+                            <button>0</button>
+                            <button>END</button>
+                        </section>
+                    </section>
+                    <section class="atm-hole-interfaces">
+                        <section class="card">
+                            <h5>Card</h5>
+                            <hr>
+                        </section>
+                        <section class="withdrawl">
+                            <h5>Withdrawl</h5>
+                            <hr>
+                        </section>
+                        <section class="deposit">
+                            <h5>Deposit</h5>
+                            <hr>
+                        </section>
+                        <section class="receipt">
+                            <h5>Receipt</h5>
+                            <hr>
+                        </section>
+                    </section>
                 </section>
             </section>
         </main>
-        <footer>
-            <nav class="left">&#60;</nav>
-            <section class="message-box">
-                Welcome to the ATM Simulator! Press the right arrow for the next message.
-            </section>
-            <nav class="right">&#62;</nav>
-        </footer>
         <script src="dist/scripts/app.js"></script>
     </body>
 </html>

@@ -1,6 +1,3 @@
-header h1 {
-  text-align: center;
-}
 main {
   display: flex;
   justify-content: center;
@@ -9,8 +6,8 @@ main section.atm-box {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  width: 400px;
-  height: 400px;
+  width: 100%;
+  height: 100vh;
   border-radius: 5px;
   background-color: grey;
 }
@@ -18,7 +15,7 @@ main section.atm-box section.screen-container {
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 150px;
+  height: 300px;
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid white;
@@ -31,39 +28,78 @@ main section.atm-box section.screen-container section.screen-buttons-right {
   flex-direction: column;
   margin: 0 2px;
 }
+main section.atm-box section.screen-container section.screen-buttons-left button,
+main section.atm-box section.screen-container section.screen-buttons-right button {
+  width: 40px;
+  height: 40px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
 main section.atm-box section.screen-container section.screen {
-  width: 250px;
-  height: 150px;
+  width: 800px;
+  height: 300px;
   border-radius: 4px;
   background-color: black;
 }
-main section.atm-box section.keypad-container {
-  display: flex;
-  justify-content: center;
+main section.atm-box section.lower-atm-box-container {
   align-self: center;
-  width: 100%;
-  padding-bottom: 10px;
-  border-bottom: 1px solid white;
-}
-main section.atm-box section.keypad-container section.keypad {
-  width: 128px;
+  display: flex;
+  justify-content: space-around;
+  width: 600px;
   padding-top: 10px;
 }
-main section.atm-box section.keypad-container section.keypad button {
-  width: 40px;
-  height: 30px;
-}
-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 60px;
-  background-color: lightgoldenrodyellow;
+main section.atm-box section.lower-atm-box-container section.keypad-container {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
+  padding-bottom: 10px;
 }
-footer section {
+main section.atm-box section.lower-atm-box-container section.keypad-container section.keypad {
+  width: 228px;
+  padding-top: 10px;
+}
+main section.atm-box section.lower-atm-box-container section.keypad-container section.keypad button {
+  width: 70px;
+  height: 60px;
+}
+main section.atm-box section.lower-atm-box-container section.atm-hole-interfaces {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+main section.atm-box section.lower-atm-box-container section.atm-hole-interfaces section.deposit,
+main section.atm-box section.lower-atm-box-container section.atm-hole-interfaces section.withdrawl,
+main section.atm-box section.lower-atm-box-container section.atm-hole-interfaces section.receipt,
+main section.atm-box section.lower-atm-box-container section.atm-hole-interfaces section.card {
+  border: 2px solid black;
+  padding: 4px;
+}
+main section.atm-box section.lower-atm-box-container section.atm-hole-interfaces section.deposit h5,
+main section.atm-box section.lower-atm-box-container section.atm-hole-interfaces section.withdrawl h5,
+main section.atm-box section.lower-atm-box-container section.atm-hole-interfaces section.receipt h5,
+main section.atm-box section.lower-atm-box-container section.atm-hole-interfaces section.card h5 {
   text-align: center;
+  margin: 2px;
+}
+main section.atm-box section.lower-atm-box-container section.atm-hole-interfaces section.deposit hr,
+main section.atm-box section.lower-atm-box-container section.atm-hole-interfaces section.withdrawl hr,
+main section.atm-box section.lower-atm-box-container section.atm-hole-interfaces section.receipt hr,
+main section.atm-box section.lower-atm-box-container section.atm-hole-interfaces section.card hr {
+  border: 2px inset black;
+}
+main section.atm-box section.lower-atm-box-container section.atm-hole-interfaces section.deposit {
+  width: 200px;
+}
+main section.atm-box section.lower-atm-box-container section.atm-hole-interfaces section.receipt {
+  width: 100px;
+}
+main section.atm-box section.lower-atm-box-container section.atm-hole-interfaces section.card {
+  width: 100px;
+}
+main section.atm-box section.lower-atm-box-container section.atm-hole-interfaces section.withdrawl {
+  width: 200px;
+}
+@media (max-width: 600px) {
+  main section.atm-box section.lower-atm-box-container {
+    width: 450px;
+  }
 }
