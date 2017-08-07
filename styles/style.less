@@ -51,11 +51,32 @@ main {
                 }
             }
             section.screen {
+                display: flex;
+                justify-content: space-between;
                 width: 800px;
                 height: 300px;
                 border-radius: 4px;
                 background-color: black;
                 color: greenyellow;
+                .screen-dialogue {
+                    padding: 10px;
+                    .row-asterisks, .row-underscores {
+                        letter-spacing: 5px;
+                    }
+
+                    .row-asterisks {
+                        line-height: 12px;
+                    }
+                }
+                .screen-directions {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    height: 245px;
+                    align-self: flex-end;
+                    text-align: right;
+                    padding-right: 10px;
+                }
             }
         }
         section.lower-atm-box-container {
@@ -68,7 +89,7 @@ main {
                 display: flex;
                 padding-bottom: 10px;
                 section.keypad {
-                    width: 228px;
+                    width: 218px;
                     padding-top: 10px;
                     button {
                         width: 70px;

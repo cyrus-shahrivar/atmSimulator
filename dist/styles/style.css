@@ -51,11 +51,32 @@ main section.atm-box section.screen-container section.screen-buttons-right butto
   margin-right: 5px;
 }
 main section.atm-box section.screen-container section.screen {
+  display: flex;
+  justify-content: space-between;
   width: 800px;
   height: 300px;
   border-radius: 4px;
   background-color: black;
   color: greenyellow;
+}
+main section.atm-box section.screen-container section.screen .screen-dialogue {
+  padding: 10px;
+}
+main section.atm-box section.screen-container section.screen .screen-dialogue .row-asterisks,
+main section.atm-box section.screen-container section.screen .screen-dialogue .row-underscores {
+  letter-spacing: 5px;
+}
+main section.atm-box section.screen-container section.screen .screen-dialogue .row-asterisks {
+  line-height: 12px;
+}
+main section.atm-box section.screen-container section.screen .screen-directions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 245px;
+  align-self: flex-end;
+  text-align: right;
+  padding-right: 10px;
 }
 main section.atm-box section.lower-atm-box-container {
   align-self: center;
@@ -69,7 +90,7 @@ main section.atm-box section.lower-atm-box-container section.keypad-container {
   padding-bottom: 10px;
 }
 main section.atm-box section.lower-atm-box-container section.keypad-container section.keypad {
-  width: 228px;
+  width: 218px;
   padding-top: 10px;
 }
 main section.atm-box section.lower-atm-box-container section.keypad-container section.keypad button {

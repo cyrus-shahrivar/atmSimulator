@@ -1,15 +1,17 @@
 // Business Logic - Init functions
 function createAPin () {
-    var randomNumber = Math.floor(Math.random()*10000);
-    if (randomNumber < 1000) {
-        return '0' + String(randomNumber);
-    } else {
-        return String(randomNumber);
-    }
+    var start = 1000;
+    var endNotInclusive = 10000;
+    var randomNumber = Math.floor(Math.random()*(endNotInclusive - start)) + start;
+    return String(randomNumber);
 }
 
 function savePinToLocalStorage(pin) {
     return localStorage.setItem('pin', pin);
+}
+
+function saveTestPinToLocalStorage(){
+    return localStorage.setItem('testPin', null);
 }
 
 function createAccount() {
@@ -71,26 +73,74 @@ END: User is presented with congratulations screen
 // Init Flow
 createAccount();
 savePinToLocalStorage(createAPin());
+saveTestPinToLocalStorage();
 displayPin(getPinFromLocalStorage());
 
 (function modal(){
     $('#modal').fadeIn('slow');
 })();
 
-
+// Initial Click Handlers
 $('#dismissal-x').click(function(){
     $('#modal').fadeOut('fast');
-    $('#screen').html('<p>Welcome to The Bank\'s ATM! Please insert your debit card to continue.</p>');
+    $('#screen .prompt-message').text('Welcome to The Bank\'s ATM! Please insert your debit card to continue.');
     $('.card').addClass('glow-yellow');
 });
 
+$('section.card').one('click', function () {
+    $('#screen .prompt-message').text('Please enter your pin.');
+    $('.card').removeClass('glow-yellow');
+    $('section.keypad-container').addClass('glow-yellow');
+})
+
+$('section.deposit').one('click', function () {
+    $('#screen .prompt-message').text('Cash deposited.');
+})
+
+$('section.withdrawl').one('click', function () {
+    $('#screen .prompt-message').text('Which action would you like to take? [Show Balance, Withdrawl, Deposit, Exit]');
+})
+
+$('section.receipt').one('click', function () {
+    $('#screen .prompt-message').text('Which action would you like to take? [Show Balance, Withdrawl, Deposit, Exit]');
+})
+
+$('#show-balance').click(function(){
+    console.log('Hit balance')
+});
+
+$('#withdrawl').click(function(){
+    console.log('Hit withdrawl')
+});
+
+$('#deposit').click(function(){
+    console.log('Hit deposit')
+});
+
+$('#exit-or-finish').click(function(){
+    console.log('Hit exit')
+});
+
+$('.keypad button').click(function(e){
+    localStorage.getItem('testPin')
+    localStorage.setItem()
+    console.log(typeof e.target.innerHTML);
+    if ($('.pin-entry .row-asterisks').text().length < 4) {
+        console.log('in')
+        $('.pin-entry .row-asterisks').append('<span>*</span>');
+    }
+    $('section.keypad-container').removeClass('glow-yellow');
+});
 
 
 // Dialogue
 /*
 1. Welcome to the ATM Simulator! Your PIN is ####
 2. Welcome to The Bank's ATM! Please insert your debit card to continue.
-3. Which action would you like to take? [Show Balance, Withdrawl, Deposit, Exit]
+3. Please enter your pin.
+[CORRECT PIN]
+4. Which action would you like to take? [Show Balance, Withdrawl, Deposit, Exit]
+[INCORRECT PIN] - Exit
 [Show Balance]
 1. Your balance is ####.
 2. Which action would you like to take? [Withdrawl, Deposit, Finish]
@@ -105,11 +155,11 @@ $('#dismissal-x').click(function(){
 3. Cash deposited.
 4. Which action would you like to take? [Withdrawl, Deposit, Finish]
 [Finish]
-1. Returning Card... 
-2. Thank you for using The Bank's ATM! Please take your card. Have a nice day!
+1. Returning card and printing receipt.
+2. Thank you for using The Bank's ATM! Please take your card and receipt. Have a nice day!
 3. <Go to Step 2>
 [Exit] - option is always present
-1. Returning Card... 
-2. Thank you for using The Bank's ATM! Please take your card. Have a nice day!
+1. Returning card and printing receipt.
+2. Thank you for using The Bank's ATM! Please take your card and recepit. Have a nice day!
 3. <Go to Step 2>
 */
