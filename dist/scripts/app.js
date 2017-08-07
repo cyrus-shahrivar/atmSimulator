@@ -11,7 +11,7 @@ function savePinToLocalStorage(pin) {
 }
 
 function saveTestPinToLocalStorage(){
-    return localStorage.setItem('testPin', null);
+    return localStorage.setItem('testPin', '');
 }
 
 function createAccount() {
@@ -122,10 +122,9 @@ $('#exit-or-finish').click(function(){
 });
 
 $('.keypad button').click(function(e){
-    localStorage.getItem('testPin')
-    localStorage.setItem()
-    console.log(typeof e.target.innerHTML);
     if ($('.pin-entry .row-asterisks').text().length < 4) {
+        var currentPin = localStorage.getItem('testPin')
+        localStorage.setItem('testPin', currentPin + e.target.innerHTML)
         console.log('in')
         $('.pin-entry .row-asterisks').append('<span>*</span>');
     }
