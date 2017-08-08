@@ -62,15 +62,19 @@ main section.atm-box section.screen-container section.screen {
 main section.atm-box section.screen-container section.screen .screen-dialogue {
   padding: 10px;
 }
-main section.atm-box section.screen-container section.screen .screen-dialogue .row-asterisks,
-main section.atm-box section.screen-container section.screen .screen-dialogue .row-underscores {
+main section.atm-box section.screen-container section.screen .screen-dialogue .pin-entry {
+  display: none;
+}
+main section.atm-box section.screen-container section.screen .screen-dialogue .pin-entry .row-asterisks,
+main section.atm-box section.screen-container section.screen .screen-dialogue .pin-entry .row-underscores {
   letter-spacing: 5px;
 }
-main section.atm-box section.screen-container section.screen .screen-dialogue .row-asterisks {
+main section.atm-box section.screen-container section.screen .screen-dialogue .pin-entry .row-asterisks {
   line-height: 12px;
 }
 main section.atm-box section.screen-container section.screen .screen-directions {
   display: flex;
+  display: none;
   flex-direction: column;
   justify-content: space-around;
   height: 245px;

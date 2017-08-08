@@ -60,16 +60,20 @@ main {
                 color: greenyellow;
                 .screen-dialogue {
                     padding: 10px;
-                    .row-asterisks, .row-underscores {
-                        letter-spacing: 5px;
-                    }
+                    .pin-entry {
+                        display: none;
+                        .row-asterisks, .row-underscores {
+                            letter-spacing: 5px;
+                        }
 
-                    .row-asterisks {
-                        line-height: 12px;
+                        .row-asterisks {
+                            line-height: 12px;
+                        }
                     }
                 }
                 .screen-directions {
                     display: flex;
+                    display: none;
                     flex-direction: column;
                     justify-content: space-around;
                     height: 245px;

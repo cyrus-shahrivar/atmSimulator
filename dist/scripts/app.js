@@ -23,6 +23,10 @@ function getPinFromLocalStorage() {
     return localStorage.getItem('pin');
 }
 
+function getTestPinFromLocalStorage() {
+    return localStorage.getItem('testPin');
+}
+
 function loginToAccount(pin) {
     var localPin = getPinFromLocalStorage();
     if (localPin === pin) {
@@ -91,6 +95,7 @@ $('section.card').one('click', function () {
     $('#screen .prompt-message').text('Please enter your pin.');
     $('.card').removeClass('glow-yellow');
     $('section.keypad-container').addClass('glow-yellow');
+    $('.pin-entry').show();
 })
 
 $('section.deposit').one('click', function () {
@@ -106,7 +111,8 @@ $('section.receipt').one('click', function () {
 })
 
 $('#show-balance').click(function(){
-    console.log('Hit balance')
+    var balance = getBalance();
+    $('#screen .prompt-message').text('Your balance is $' + balance + '.  \n Which action would you like to take?');
 });
 
 $('#withdrawl').click(function(){
@@ -125,10 +131,24 @@ $('.keypad button').click(function(e){
     if ($('.pin-entry .row-asterisks').text().length < 4) {
         var currentPin = localStorage.getItem('testPin')
         localStorage.setItem('testPin', currentPin + e.target.innerHTML)
-        console.log('in')
         $('.pin-entry .row-asterisks').append('<span>*</span>');
     }
     $('section.keypad-container').removeClass('glow-yellow');
+});
+
+$('.keypad button.enter').click(function(e){
+    var testPin = getTestPinFromLocalStorage();
+    if (loginToAccount(testPin) === 'login') {
+        $('#screen .prompt-message').text('Which action would you like to take?');
+        $('.pin-entry').hide();
+        $('.screen-directions').css({
+            display: 'flex'
+        });
+    } else {
+        saveTestPinToLocalStorage('')
+        $('.pin-entry .row-asterisks').html('');
+        $('#screen .prompt-message').text('Please reenter you pin.')
+    }
 });
 
 
@@ -139,7 +159,7 @@ $('.keypad button').click(function(e){
 3. Please enter your pin.
 [CORRECT PIN]
 4. Which action would you like to take? [Show Balance, Withdrawl, Deposit, Exit]
-[INCORRECT PIN] - Exit
+[INCORRECT PIN] - Step 3.
 [Show Balance]
 1. Your balance is ####.
 2. Which action would you like to take? [Withdrawl, Deposit, Finish]
