@@ -84,73 +84,126 @@ displayPin(getPinFromLocalStorage());
     $('#modal').fadeIn('slow');
 })();
 
+// NOTE: each click event has a different function depending on the state of the program
+
+var stateContainer = {
+    state: 'login'
+    // states:
+    // 'login'
+    // 'show balance'
+    // 'withdrawl'
+    // 'deposit'
+    // 'deposit confirm'
+    // 'finish'
+    // 'error'
+}
+
 // Initial Click Handlers
 $('#dismissal-x').click(function(){
-    $('#modal').fadeOut('fast');
-    $('#screen .prompt-message').text('Welcome to The Bank\'s ATM! Please insert your debit card to continue.');
-    $('.card').addClass('glow-yellow');
+    if (stateContainer.state === 'login') {
+        $('#modal').fadeOut('fast');
+        $('#screen .prompt-message').text('Welcome to The Bank\'s ATM! Please insert your debit card to continue.');
+        $('.card').addClass('glow-yellow');
+    }
 });
 
-$('section.card').one('click', function () {
-    $('#screen .prompt-message').text('Please enter your pin.');
-    $('.card').removeClass('glow-yellow');
-    $('section.keypad-container').addClass('glow-yellow');
-    $('.pin-entry').show();
+$('section.card').click(function () {
+    if (stateContainer.state === 'login') {
+        $('#screen .prompt-message').text('Please enter your pin.');
+        $('.card').removeClass('glow-yellow');
+        $('section.keypad-container').addClass('glow-yellow');
+        $('.pin-entry').show();
+    } else if (stateContainer.state === 'finish') {
+        // state === 'finish'
+        $('#screen .prompt-message').text('Thank you for using The Bank\'s ATM! Please take your card and recepit. Have a nice day!');
+    }
 })
-
-$('section.deposit').one('click', function () {
-    $('#screen .prompt-message').text('Cash deposited.');
-})
-
-$('section.withdrawl').one('click', function () {
-    $('#screen .prompt-message').text('Which action would you like to take? [Show Balance, Withdrawl, Deposit, Exit]');
-})
-
-$('section.receipt').one('click', function () {
-    $('#screen .prompt-message').text('Which action would you like to take? [Show Balance, Withdrawl, Deposit, Exit]');
-})
-
-$('#show-balance').click(function(){
-    var balance = getBalance();
-    $('#screen .prompt-message').text('Your balance is $' + balance + '.  \n Which action would you like to take?');
-});
-
-$('#withdrawl').click(function(){
-    console.log('Hit withdrawl')
-});
-
-$('#deposit').click(function(){
-    console.log('Hit deposit')
-});
-
-$('#exit-or-finish').click(function(){
-    console.log('Hit exit')
-});
 
 $('.keypad button').click(function(e){
-    if ($('.pin-entry .row-asterisks').text().length < 4) {
-        var currentPin = localStorage.getItem('testPin')
-        localStorage.setItem('testPin', currentPin + e.target.innerHTML)
-        $('.pin-entry .row-asterisks').append('<span>*</span>');
+    if (stateContainer.state === 'login') {
+        if ($('.pin-entry .row-asterisks').text().length < 4) {
+            var currentPin = localStorage.getItem('testPin')
+            localStorage.setItem('testPin', currentPin + e.target.innerHTML)
+            $('.pin-entry .row-asterisks').append('<span>*</span>');
+        }
+        $('section.keypad-container').removeClass('glow-yellow');
+    } else if (stateContainer.state === 'deposit' || stateContainer.state === 'withdrawl') {
+        // show what is being typed in similar to pin and save amount as edited
     }
-    $('section.keypad-container').removeClass('glow-yellow');
 });
 
 $('.keypad button.enter').click(function(e){
-    var testPin = getTestPinFromLocalStorage();
-    if (loginToAccount(testPin) === 'login') {
-        $('#screen .prompt-message').text('Which action would you like to take?');
-        $('.pin-entry').hide();
-        $('.screen-directions').css({
-            display: 'flex'
-        });
-    } else {
-        saveTestPinToLocalStorage('')
-        $('.pin-entry .row-asterisks').html('');
-        $('#screen .prompt-message').text('Please reenter you pin.')
+    if (stateContainer.state === 'login') {
+        var testPin = getTestPinFromLocalStorage();
+        if (loginToAccount(testPin) === 'login') {
+            $('#screen .prompt-message').text('Which action would you like to take?');
+            $('.pin-entry').hide();
+            $('.screen-directions').css({
+                display: 'flex'
+            });
+        } else {
+            saveTestPinToLocalStorage('')
+            $('.pin-entry .row-asterisks').html('');
+            $('#screen .prompt-message').text('Please reenter you pin.')
+        }
+    } else if (stateContainer.state === 'deposit') {
+        // confirm amount with user
+    } else if (stateContainer.state === 'deposit confirm') {
+        // show new balance and ask what they want to do next
     }
 });
 
+$('section.deposit').click(function () {
+    if (stateContainer.state === 'deposit confirm') {
+        $('#screen .prompt-message').text('Cash deposited.');
+    }
+})
+
+$('section.withdrawl').click(function () {
+    if (stateContainer.state === 'withdrawl') {
+        $('#screen .prompt-message').text('Which action would you like to take? [Show Balance, Withdrawl, Deposit, Exit]');
+    }
+})
+
+$('section.receipt').click(function () {
+    if (stateContainer.state === 'finish') {
+        $('#screen .prompt-message').text('Thank you for using The Bank\'s ATM! Please take your card and recepit. Have a nice day!');
+    }
+})
+
+$('#show-balance').click(function(){
+    if (stateContainer.state !== 'deposit' || stateContainer.state !== 'withdrawl' || stateContainer.state !== 'finish') {
+        stateContainer.state = 'show balance';
+    }
+    if (stateContainer.state === 'show balance') {
+        var balance = getBalance();
+        $('#screen .prompt-message').text('Your balance is $' + balance + '.  \n Which action would you like to take?');
+    }
+});
+
+$('#withdrawl').click(function(){
+    if (stateContainer.state !== 'deposit' || stateContainer.state !== 'finish') {
+        stateContainer.state = 'withdrawl';
+    }
+    if (stateContainer.state === 'withdrawl') {
+        console.log('How much would you like to withdrawl?');
+    }
+});
+
+$('#deposit').click(function(){
+    if (stateContainer.state !== 'withdrawl' || stateContainer.state !== 'finish') {
+        stateContainer.state = 'deposit';
+    }
+    if (stateContainer.state === 'deposit') {
+        console.log('How much would you like to deposit?');
+    }
+});
+
+$('#exit-or-finish').click(function(){
+    if (stateContainer.state === 'finish') {
+        $('#screen .prompt-message').text('Thank you for using The Bank\'s ATM! Please take your card and recepit. Have a nice day!');
+    }
+});
 
 // Dialogue
 /*
