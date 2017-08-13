@@ -72,6 +72,9 @@ main section.atm-box section.screen-container section.screen .screen-dialogue .p
 main section.atm-box section.screen-container section.screen .screen-dialogue .pin-entry .row-asterisks {
   line-height: 12px;
 }
+main section.atm-box section.screen-container section.screen .screen-dialogue .number-entry {
+  display: none;
+}
 main section.atm-box section.screen-container section.screen .screen-directions {
   display: flex;
   display: none;

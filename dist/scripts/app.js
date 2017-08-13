@@ -119,7 +119,7 @@ $('section.card').click(function () {
     }
 })
 
-$('.keypad button').click(function(e){
+$('.keypad button.number').click(function(e){
     if (stateContainer.state === 'login') {
         if ($('.pin-entry .row-asterisks').text().length < 4) {
             var currentPin = localStorage.getItem('testPin')
@@ -129,6 +129,9 @@ $('.keypad button').click(function(e){
         $('section.keypad-container').removeClass('glow-yellow');
     } else if (stateContainer.state === 'deposit' || stateContainer.state === 'withdrawl') {
         // show what is being typed in similar to pin and save amount as edited
+        console.log(e.target.innerHTML)
+        $('.number-entry').show();
+        $('.number-entry .row-numbers').append('<span>' + e.target.innerHTML + '</span>');
     }
 });
 
@@ -147,21 +150,35 @@ $('.keypad button.enter').click(function(e){
             $('#screen .prompt-message').text('Please reenter you pin.')
         }
     } else if (stateContainer.state === 'deposit') {
-        // confirm amount with user
+        stateContainer.state = 'deposit confirm';
+        $('#screen .prompt-message').text('Are you sure you would like to deposit this amount?');
     } else if (stateContainer.state === 'deposit confirm') {
-        // show new balance and ask what they want to do next
+        $('.number-entry').hide();
+        $('#screen .prompt-message').text('Please deposit money into deposit slot below');
+    } else if (stateContainer.state === 'withdrawl') {
+        stateContainer.state = 'withdrawl confirm';
+        $('#screen .prompt-message').text('Are you sure you would like to withdrawl this amount?');
+    } else if (stateContainer.state === 'withdrawl confirm') {
+        $('.number-entry').hide();
+        $('#screen .prompt-message').text('Please take your money from the withdrawl slot');
     }
 });
 
 $('section.deposit').click(function () {
     if (stateContainer.state === 'deposit confirm') {
-        $('#screen .prompt-message').text('Cash deposited.');
+        $('#screen .prompt-message').html('');
+        $('#screen .prompt-message').append('<p>Cash deposited.</p>');
+        $('#screen .prompt-message').append('<p>Your new balance is: </p>');
+        $('#screen .prompt-message').append('<p>Which action would you like to take? [Show Balance, Withdrawl, Deposit, Exit]</p>');
     }
 })
 
 $('section.withdrawl').click(function () {
-    if (stateContainer.state === 'withdrawl') {
-        $('#screen .prompt-message').text('Which action would you like to take? [Show Balance, Withdrawl, Deposit, Exit]');
+    if (stateContainer.state === 'withdrawl confirm') {
+        $('#screen .prompt-message').html('');
+        $('#screen .prompt-message').append('<p>Cash withdrawn.</p>');
+        $('#screen .prompt-message').append('<p>Your new balance is: </p>');
+        $('#screen .prompt-message').append('<p>Which action would you like to take? [Show Balance, Withdrawl, Deposit, Exit]</p>');
     }
 })
 
@@ -172,7 +189,7 @@ $('section.receipt').click(function () {
 })
 
 $('#show-balance').click(function(){
-    if (stateContainer.state !== 'deposit' || stateContainer.state !== 'withdrawl' || stateContainer.state !== 'finish') {
+    if ((stateContainer.state !== 'deposit' || stateContainer.state !== 'withdrawl') && stateContainer.state !== 'finish') {
         stateContainer.state = 'show balance';
     }
     if (stateContainer.state === 'show balance') {
@@ -182,27 +199,26 @@ $('#show-balance').click(function(){
 });
 
 $('#withdrawl').click(function(){
-    if (stateContainer.state !== 'deposit' || stateContainer.state !== 'finish') {
+    if (stateContainer.state !== 'deposit' && stateContainer.state !== 'finish') {
         stateContainer.state = 'withdrawl';
     }
     if (stateContainer.state === 'withdrawl') {
-        console.log('How much would you like to withdrawl?');
+        $('#screen .prompt-message').text('How much would you like to withdrawl?');
     }
 });
 
 $('#deposit').click(function(){
-    if (stateContainer.state !== 'withdrawl' || stateContainer.state !== 'finish') {
+    if (stateContainer.state !== 'withdrawl' && stateContainer.state !== 'finish') {
         stateContainer.state = 'deposit';
     }
     if (stateContainer.state === 'deposit') {
-        console.log('How much would you like to deposit?');
+        $('#screen .prompt-message').text('How much would you like to deposit?');
     }
 });
 
 $('#exit-or-finish').click(function(){
-    if (stateContainer.state === 'finish') {
-        $('#screen .prompt-message').text('Thank you for using The Bank\'s ATM! Please take your card and recepit. Have a nice day!');
-    }
+    stateContainer.state = 'finish';
+    $('#screen .prompt-message').text('Thank you for using The Bank\'s ATM! Please take your card and recepit. Have a nice day!');
 });
 
 // Dialogue
@@ -234,4 +250,14 @@ $('#exit-or-finish').click(function(){
 1. Returning card and printing receipt.
 2. Thank you for using The Bank's ATM! Please take your card and recepit. Have a nice day!
 3. <Go to Step 2>
+*/
+
+
+// TODOs
+/*
+- error handling
+- calculate balance after action
+- congratulations message
+- toggle assistance mode
+- fancy design
 */
