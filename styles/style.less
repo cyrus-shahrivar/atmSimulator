@@ -19,8 +19,9 @@
 }
 
 main {
-    display: flex;
+    display: none;
     justify-content: center;
+    background-color: black;
     section.atm-box {
         display: flex;
         align-items: flex-start;
@@ -140,6 +141,12 @@ main {
                 }
             }
         }
+        section.assistanceButton {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-family: sans-serif;
+        }
     }
 }
 
@@ -147,9 +154,12 @@ main {
     width: 100vw;
     height: 100vh;
     background-color: grey;
+    background-image: url('../../images/moneyPhoto.jpg');
+    background-position: center;
+    background-size: cover;
+    color: white;
     position: fixed;
     top: 0;
-    opacity: 0.9;
     display: none;
     #dismissal-x {
         color: whitesmoke;

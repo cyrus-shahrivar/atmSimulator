@@ -14,8 +14,9 @@
   animation-delay: 10s;
 }
 main {
-  display: flex;
+  display: none;
   justify-content: center;
+  background-color: black;
 }
 main section.atm-box {
   display: flex;
@@ -142,13 +143,22 @@ main section.atm-box section.lower-atm-box-container section.atm-hole-interfaces
 main section.atm-box section.lower-atm-box-container section.atm-hole-interfaces section.withdrawl {
   width: 200px;
 }
+main section.atm-box section.assistanceButton {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-family: sans-serif;
+}
 #modal {
   width: 100vw;
   height: 100vh;
   background-color: grey;
+  background-image: url('../../images/moneyPhoto.jpg');
+  background-position: center;
+  background-size: cover;
+  color: white;
   position: fixed;
   top: 0;
-  opacity: 0.9;
   display: none;
 }
 #modal #dismissal-x {
